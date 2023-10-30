@@ -1,0 +1,30 @@
+package is080;
+
+public class SWapping {
+		public static void main(String arg[]) {
+			
+			int arr[] = {3 , 5 ,6 ,7 , 9};
+			
+			long starttime = System.nanoTime();
+			  swap(arr , 2 , 3);
+			  
+			  for(int i = 0 ; i < 5 ; i++) 
+				{
+				System.out.print(arr[i] + " ");
+				}
+				System.out.println("");
+			  
+			long endTime = System.nanoTime();
+				long executionTime
+		        = (endTime - starttime) / 1000000;
+
+		    System.out.println("Bubble sorting takes "
+		                       + executionTime + "ms");
+		}
+		
+		public static void swap(int arr[] , int i , int j) {
+			int temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+}
