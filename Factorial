@@ -1,0 +1,29 @@
+package is070;
+import java.util.Scanner;
+import java.io.*;
+
+public class fact {
+		
+	static int factorial(int n)
+	{
+		if(n==0 || n==1)
+			return 1;
+		
+		else
+			return n*factorial(n-1);
+	}
+	
+	public static void main(String args[])
+	{
+		long st = System.nanoTime();
+		int res = factorial(5);
+		System.out.println("fact = "+res);
+		long ed = System.nanoTime();
+		long executionTime
+        = (ed - st) / 1000000;
+		System.out.println(executionTime+" ms");
+		
+		
+		
+	}
+}
