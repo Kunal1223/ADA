@@ -1,0 +1,29 @@
+//Java program to demonstrate Basic Euclidean Algorithm
+package is080;
+import java.lang.*;
+import java.util.*;
+
+class Euclid{
+	public static int gcd(int a, int b)
+	{
+		if (a == 0)
+			return b;
+
+		return gcd(b % a, a);
+	}
+
+	// Driver code
+	public static void main(String[] args)
+	{
+		int a = 35, b = 10, g;
+		long st = System.nanoTime();
+		// Function call
+		g = gcd(a, b);
+		System.out.println("GCD(" + a + " , " + b+ ") = " + g);
+
+		long et = System.nanoTime();
+		long ex = (et-st)/1000000;
+		System.out.println("Time taken = "+ex +"ms");
+		
+	}
+}
