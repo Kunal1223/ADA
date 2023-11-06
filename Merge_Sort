@@ -1,0 +1,92 @@
+package is080;
+import java.lang.*;
+
+class MergeSort_FUnction { 
+	void merge_Function(int arr[], int start, int mid, int end) 
+	{ 
+		int size1 = mid - start + 1; 
+		int size2 = end - mid; 
+
+		int demo1[] = new int[size1]; 
+		int demo2[] = new int[size2]; 
+
+		for (int i = 0; i < size1; ++i) 
+			demo1[i] = arr[start + i]; 
+		
+		for (int j = 0; j < size2; ++j) 
+			demo2[j] = arr[mid + 1 + j]; 
+
+		int i = 0, j = 0; 
+
+		int k = start; 
+		while (i < size1 && j < size2) { 
+			if (demo1[i] <= demo2[j]) { 
+				arr[k] = demo1[i]; 
+				i++; 
+			} 
+			else { 
+				arr[k] = demo2[j]; 
+				j++; 
+			} 
+			k++; 
+		} 
+
+		while (i < size1) { 
+			arr[k] = demo1[i]; 
+			i++; 
+			k++; 
+		} 
+
+		while (j < size2) { 
+			arr[k] = demo2[j]; 
+			j++; 
+			k++; 
+		} 
+	} 
+ 
+	void sort(int arr[], int l, int r) 
+	{ 
+		if (l < r) { 
+			int m = (l + r) / 2; 
+
+			sort(arr, l, m); 
+			sort(arr, m + 1, r); 
+
+			merge_Function(arr, l, m, r); 
+		} 
+	} 
+
+}
+ 
+
+public class Merge_Sort {
+	
+	static void printArray(int arr[]) 
+	{ 
+		int n = arr.length; 
+		for (int i = 0; i < n; ++i) 
+		System.out.print(arr[i] + " "); 
+		System.out.println(); 
+	} 
+	
+	
+	public static void main(String args[]) 
+	{ 
+		long st = System.nanoTime();
+		int arr[] = { 12, 11, 13, 5, 6, 7 }; 
+
+		System.out.println("Given Array"); 
+		printArray(arr); 
+
+		MergeSort_FUnction  ob = new MergeSort_FUnction (); 
+		ob.sort(arr, 0, arr.length - 1); 
+
+		System.out.println("\nSorted array"); 
+		printArray(arr); 
+		
+		long et = System.nanoTime();
+		long ex = (et-st)/1000000;
+		System.out.println("Time taken = "+ex +"ms");
+	} 
+}
+
