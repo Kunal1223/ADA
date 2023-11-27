@@ -1,0 +1,82 @@
+package is070;
+import java.util.*;
+public class FLOYDS {
+	
+		public void floyds(int p[][], int n)
+		{
+			int i,j,k;
+			for(k=1;k<=n;k++)
+				for(i=1;i<=n;i++)
+					for(j=1;j<=n;j++)
+						if(i==j)
+							p[i][j]=0;
+						else
+							p[i][j]=min(p[i][j],p[i][k]+p[k][j]);
+			}
+		
+		public int min(int a,int b)
+		{
+			if(a<b)
+				return(a);
+			else
+				return(b);
+		}
+		
+		public static void main(String args[])
+		{
+			
+		 long st = System.nanoTime();
+		 
+		 int p[][]=new int[10][10];
+		 int i,j;
+		 Scanner sc = new Scanner(System.in);
+		 
+		 System.out.println("Enter the number of vertices:");
+		 int n = sc.nextInt();
+		 System.out.println(" Enter the number of edges:");
+		 int e = sc.nextInt();
+		 
+		 for(i=1;i<=n;i++)
+		 {
+		  for(j=1;j<=n;j++)
+		   p[i][j]=999;
+		 }
+		 for(i=1;i<=e;i++)
+		 {
+		  System.out.println("\n Enter the end vertices of edge "+i+" with its weight ");
+		  int u = sc.nextInt();
+		  int v = sc.nextInt();
+		  int w = sc.nextInt();	 
+		  p[u][v]=w;
+		 }
+		 System.out.println("\n Matrix of input data:\n");
+		 for(i=1;i<=n;i++)
+		 {
+		  for(j=1;j<=n;j++)
+			  System.out.print(p[i][j]+" 	");
+		  System.out.println();
+		 }
+		 
+		 FLOYDS ob = new FLOYDS();
+		 
+		 ob.floyds(p,n);
+		 System.out.println("\n Transitive closure:\n");
+		 for(i=1;i<=n;i++)
+		 {
+		  for(j=1;j<=n;j++)
+			  System.out.print(p[i][j]+" 	");
+		  System.out.println();
+		 }
+		 System.out.println("\n The shortest paths are:\n");
+		 for(i=1;i<=n;i++)
+		  for(j=1;j<=n;j++)
+		  {
+		   if(i!=j)
+			   System.out.println("< "+i+" , " + j+" > "+p[i][j]);
+		  }
+		 
+		 long et = System.nanoTime();
+		 long ex = (et - st)/1000000;
+		 System.out.println("Time taken by Floyd algorithm "+ ex+ " ms");
+		}
+	}
