@@ -1,0 +1,61 @@
+package is080;
+import java.util.Scanner;
+
+public class BFS {
+static void bfs(int [][] a, int source, int []visited, int n){
+     int f,r,u,v;
+     int queue[] = new int[20];
+     f=0;
+     r=-1;
+     queue[++r]=source;
+     while(f<=r){
+    	 u=queue[f++];
+    	 for(v=1;v<=n;v++) {
+    		 if(a[u][v]==1 && visited[v]==0) {
+    			 queue[++r]=v;
+    			 visited[v]=1;
+    		 }
+    	 }
+     }
+}
+
+
+public static void main(String args[]) {
+	long startTime = System.nanoTime();
+	int a[][] = new int[20][20];
+	int visited[] = new int[20];
+	int source;
+	
+	System.out.println("Enter the number of vertices");
+
+	Scanner sc = new Scanner(System.in);
+	int n = sc.nextInt();
+
+	System.out.println("Enter the adjacency matrix");
+	for(int i=0; i<=n; i++) {
+		for(int j=0; j<=n; j++) {
+			a[i][j] = sc.nextInt();
+		}
+	}
+
+	for(int i=0; i<=n; i++) {
+		visited[i] = 0;
+	}
+
+	System.out.println("Enter the source node ");
+	source = sc.nextInt();
+
+	visited[source]=1;
+	bfs(a,source,visited,n);
+	for(int i=1;i<=n;i++) {
+		if(visited[i]!=0)
+			System.out.println("\n Node "+i+" is reachable ");
+		else
+			System.out.println("\n Node "+i+" is not reachable");
+	}
+	long endTime = System.nanoTime();
+	long executionTime = (endTime - startTime) / 1000000;
+	System.out.println("BFS takes " + executionTime + "ms");
+
+	}
+}
