@@ -1,0 +1,43 @@
+package is080;
+
+public class Selection_Sort {
+	
+	public static void selection_sort(int a[]) {
+		int n = a.length;
+		
+		for(int i = 0 ; i < n-1 ; i++) {
+			int index = i;
+			for(int j = i+1 ; j < n ; j++) {
+				if(a[j] < a[index]) {
+					index = j;
+				}
+			}
+			
+			int temp = a[i];
+			a[i] = a[index];
+			a[index] = temp;
+			
+		}
+	}
+	
+	
+	public static void printarr(int a[]) {
+		for(int value : a) {
+			System.out.print(value +" ");
+		}
+		System.out.println();
+	}
+	
+	
+	public static void main(String []args) {
+		int a[] = {3 , 1, 5,6,9,2,4};
+		
+		System.out.println("The unsorted array is: ");
+		printarr(a);
+		
+		selection_sort(a);
+		
+		System.out.println("The sorted array is: ");
+		printarr(a);
+	}
+}
