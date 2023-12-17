@@ -1,0 +1,47 @@
+package is080;
+import java.util.Scanner;
+
+public class DFSK {
+	static void DFS(int []v, int n, int [][]a, int x) {
+		int count = 0;
+		count++;
+		v[x]=count;
+		if(v[x]!=0)
+			System.out.println("%d\t "+x);
+
+		int k;
+		for(k=1;k<=n;k++)
+			if(a[x][k]==1 && v[k]==0)
+				DFS(v,n,a,k);
+}
+
+	public static void main(String args[]) {
+		long startTime = System.nanoTime();
+		int a[][] = new int[10][10];
+		int v[] = new int[10];
+
+
+		System.out.println("\nEnter no. of Nodes: ");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+
+		System.out.println("\nEnter the Adjacency Matrix:-\n");
+		for(int i=1;i<=n;i++)
+			for(int j=1;j<=n;j++)
+				a[i][j] = sc.nextInt();
+
+		for(int i=1;i<=n;i++)
+			v[i]=0;
+		System.out.println("\nDFS:\t");
+		
+		for(int i=1;i<=n;i++)
+			if(v[i]==0)
+				DFS(v,n,a,i);
+		System.out.println("\n");
+		
+		long endTime = System.nanoTime();
+		long executionTime = (endTime - startTime) / 1000000;
+		System.out.println("DFS takes " + executionTime + "ms");
+	}
+}
+
