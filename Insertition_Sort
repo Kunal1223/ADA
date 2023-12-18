@@ -1,0 +1,43 @@
+package is080;
+
+public class Insertion_Sort {
+	
+	public static void insertion_sort(int a[]) {
+		int n = a.length;
+		
+		for(int i = 1 ; i < n ; i++) {
+			int k = a[i];
+			int j = i -1;
+			
+			while(j >= 0 && a[j] > k) {
+				swap(a , j , j+1);
+				j = j -1;
+			}
+		}
+	}
+	
+	public static void swap(int a[] , int i ,int j) {
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	
+	public static void printarr(int a[]) {
+		for(int value : a) {
+			System.out.print(value +" ");
+		}
+		System.out.println();
+	}
+	
+	public static void main(String[] args) {
+		int a[] = {2,5,1,7,9,3};
+		printarr(a);
+		
+		insertion_sort(a);
+		
+		printarr(a);
+		
+
+	}
+
+}
