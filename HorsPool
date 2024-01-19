@@ -1,47 +1,56 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
 import java.util.*;
 
-public class HorspoolAlgorithm {
-
-    // Preprocessing step: generate a bad character shift table
-    private static Map<Character, Integer> preprocessPattern(String pattern) {
-        Map<Character, Integer> badCharShift = new HashMap<>();
+class HelloWorld {
+    
+    static Map<Character , Integer> process(String pattern){
         int m = pattern.length();
-        for (int i = 0; i < m - 1; ++i) {
-            badCharShift.put(pattern.charAt(i), m - 1 - i);
+        
+        Map<Character , Integer> badshift = new HashMap<>();
+        
+        for(int i =0 ; i < m-1 ; ++i){
+            badshift.put(pattern.charAt(i) , m - 1 - i);
         }
-        return badCharShift;
+        
+        return badshift;
     }
-
-    // Main function for pattern search using Horspool's algorithm
-    private static int horspoolSearch(String dnaSequence, String pattern) {
-    int n = dnaSequence.length();
-    int m = pattern.length();
-    Map<Character, Integer> badCharShift = preprocessPattern(pattern);
-
-    int i = m - 1; // start matching from the end of the pattern
-    while (i < n) {
-        int j = m - 1;
-        int k = i;
-        while (j >= 0 && dnaSequence.charAt(k) == pattern.charAt(j)) {
-            k--;
-            j--;
+    
+    static int horspoolsearch(String charset , String tofind){
+        int n = charset.length();
+        int m = tofind.length();
+        
+        Map<Character , Integer> badshift = process(tofind);
+        
+        int i = m-1;
+        
+        while(i < n){
+            int j = m-1;
+            int k = i;
+            
+           while(j >= 0 && charset.charAt(k) == tofind.charAt(j)){
+                k--;
+                j--;
+            }
+            
+            if(j == -1){
+                return k+1;
+            }else{
+                i += badshift.getOrDefault(charset.charAt(i) , m );
+            }
         }
-        if (j == -1) {
-            return k + 1; // pattern found at position k+1
-        } else {
-            i += badCharShift.getOrDefault(dnaSequence.charAt(i), m);
-        }
+        
+        return -1;
+        
     }
-
-    return -1; // pattern not found in the DNA sequence
-}
-
+    
     public static void main(String[] args) {
-        String dnaSequence = "TCGTCGATCGA";
-        String patternToFind = "ATCGA";
-        int result = horspoolSearch(dnaSequence, patternToFind);
-
-        if (result != -1) {
+        
+        String charset = "MYNAMEISKUNAL";
+        String tofind = "ISKUNA";
+        
+        int result = horspoolsearch(charset , tofind);
+       if (result != -1) {
             System.out.println("Pattern found at position " + result);
         } else {
             System.out.println("Pattern not found in the DNA sequence");
