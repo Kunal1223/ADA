@@ -1,0 +1,77 @@
+import java.util.*;
+
+// Structure to represent an edge in the graph
+class Edge {
+    int source, destination, weight;
+    
+    Edge(int source, int destination, int weight) {
+        this.source = source;
+        this.destination = destination;
+        this.weight = weight;
+    }
+}
+
+class KruskalsAlgorithm {
+    // Function to compare edges based on their weights
+    static class EdgeComparator implements java.util.Comparator<Edge> {
+        @Override
+        public int compare(Edge a, Edge b) {
+            return Integer.compare(a.weight, b.weight);
+        }
+    }
+
+    // Function to find the parent of a vertex in a disjoint set
+    static int findParent(int vertex, int[] parent) {
+        if (parent[vertex] == -1)
+            return vertex;
+        return findParent(parent[vertex], parent);
+    }
+
+    // Function to perform Kruskal's algorithm and output the least expensive tree of roads
+    static void kruskalMST(ArrayList<Edge> edges, int n) {
+    // Sort the edges in non-decreasing order of their weights
+    Collections.sort(edges, new EdgeComparator());
+
+    int[] parent = new int[n + 1]; // Adding 1 to the size to accommodate indices from 1 to n
+    for (int i = 0; i <= n; i++) {
+        parent[i] = -1;
+    }
+
+    ArrayList<Edge> result = new ArrayList<>();
+
+    for (Edge edge : edges) {
+        int sourceParent = findParent(edge.source, parent);
+        int destParent = findParent(edge.destination, parent);
+
+        // If adding this edge doesn't form a cycle, include it in the result
+        if (sourceParent != destParent) {
+            result.add(edge);
+            parent[sourceParent] = destParent;
+        }
+    }
+
+    // Output the least expensive tree of roads
+    System.out.println("Least Expensive Tree of Roads:");
+    for (Edge edge : result)
+        System.out.println("Road from Town " + edge.source + " to Town " + edge.destination + " with cost " + edge.weight);
+}
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of towns: ");
+        int n = scanner.nextInt();
+
+        System.out.print("Enter the number of roads: ");
+        int m = scanner.nextInt();
+
+        ArrayList<Edge> edges = new ArrayList<>();
+
+        System.out.println("Enter the source, destination, and cost of each road:");
+        for (int i = 0; i < m; ++i)
+            edges.add(new Edge(scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
+
+        kruskalMST(edges, n);
+    }
+}
