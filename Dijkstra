@@ -1,9 +1,9 @@
 import java.util.Arrays;
 
 class Graph {
-    private int vertices;
-    private int[][] adjacencyMatrix;
-    private static final int INF = Integer.MAX_VALUE;
+     int vertices;
+     int[][] adjacencyMatrix;
+     int INF = Integer.MAX_VALUE;
 
     public Graph(int v) {
         vertices = v;
@@ -47,7 +47,7 @@ class Graph {
         }
     }
 
-    private int minDistance(int[] distance, boolean[] visited) {
+    int minDistance(int[] distance, boolean[] visited) {
         int minDist = INF, minIndex = -1;
 
         for (int v = 0; v < vertices; ++v) {
